@@ -1,2 +1,2 @@
 # nflFootball
-Match up analysis and recommendation
+NFL American football match up analysis and recommendation.
