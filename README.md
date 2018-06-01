@@ -1,5 +1,5 @@
 # nflFootball
-NFL American football match up analysis and recommendation. *See Projects tab*
+NFL American football web scraped stats, and match up analysis and recommendation. *See Projects tab*
 
 2017_schedule.csv
 - Copy & Paste of schedule grid from ESPN
