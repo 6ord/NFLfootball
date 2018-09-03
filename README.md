@@ -1,3 +1,25 @@
+# September 3, 2018 Update
+
+2018_schedule.csv
+- This year, I coped & pasted schedule from CBS (link below) and organized information in Excel, rather than using the grid from ESPN and R.
+- https://www.cbssports.com/nfl/news/2018-nfl-schedule-release-heres-the-time-and-date-for-all-256-games/
+- *NOTE: SOME PRIMETIME GAMES ARE TBD. Will need updating later on in the season.*
+
+nflTeamBoxscoreScrape_v2.py
+- Updated to contain two scraping functions:
+  1. RegSeason2017BoxscoreScrape()
+     - single function that scrapes boxscores for entire regular season. See original documentation on the nflBoxscoreScrape() function for more details.
+     - Uses the following Python Modules: re, requests, bs4, csv, datetime
+
+  2. boxscoreScrapeWk(wkNum)
+     - scrapes boxscores for a given week (wkNum) of the season, appends output to .csv file in working path
+     - Uses the following Python Modules: re, requests, bs4, csv, datetime
+     - *Warning: Headings are also appended. Will need to remove when importing for analysis*
+
+Work In Progress: nflTeamBoxscoreStats.r
+- next iteration to convert scraped character data types to numeric as appropriate, other organizing into data frame, and incorporate analysis for recommendation.
+
+
 # nflFootball
 NFL American football web scraped stats, and match up analysis and recommendation. *See Projects tab*
 
