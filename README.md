@@ -1,6 +1,6 @@
 # September 3, 2018 Update
 
-2018_schedule.csv
+2018_schedule_single.csv
 - This year, I coped & pasted schedule from CBS (link below) and organized information in Excel, rather than using the grid from ESPN and R.
 - https://www.cbssports.com/nfl/news/2018-nfl-schedule-release-heres-the-time-and-date-for-all-256-games/
 - *NOTE: SOME PRIMETIME GAMES ARE TBD. Will need updating later on in the season.*
