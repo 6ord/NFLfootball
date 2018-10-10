@@ -97,8 +97,8 @@ def boxscoreScrapeWk(wkNum):
 
     #TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST
     #To point to 2018 schedule when 3 or 4 wks are available to scrape
-    schedule = tuple(csv.reader(open('2017_schedule_single.csv')))
-    #schedule = tuple(csv.reader(open('2018_schedule_single.csv')))
+    #schedule = tuple(csv.reader(open('2017_schedule_single.csv')))
+    schedule = tuple(csv.reader(open('2018_schedule_single.csv')))
 
     #below doesn't take column headings, which is why we loop from 0 3 blocks down
     thisWk = [(date,road,home) for (wk,date,road,home) in schedule if wk==str(wkNum)]
