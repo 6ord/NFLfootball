@@ -2,8 +2,6 @@
 
 numPastWks <- 4
 
-# priorGms <- "sum up a team's last X games. Next phase."
-
 priorWks <- aggPriorWks(nfl2018,numPastWks)
 
 priorWks <- cbind(priorWks[1],
@@ -66,8 +64,9 @@ priorWks$XPAttDefendedPerGame <- Kicking.XPDefended/GP
 detach(priorWks)
 # rm(thisWk)
 
-thisWk <- buildThisWk(5,schedule2018)
+thisWk <- buildThisWk(6,schedule2018)
 #build team and oppn metrics, cbind with thisWk after
+
 
 tw <- data.frame(lapply(thisWk,function(x){gsub('@','',x)}))
 
@@ -102,7 +101,6 @@ thisWk$Rush1stDwn <-as.numeric(getMetric(priorWks,tw$Team,90))*
 thisWk$RZPctDiff <- (as.numeric(getMetric(priorWks,tw$Team,25))/as.numeric(getMetric(priorWks,tw$Team,26)))-(1-
                     (as.numeric(getMetric(priorWks,tw$Oppn,67))/as.numeric(getMetric(priorWks,tw$Oppn,68)))
                     )
-#RZscore/trips - (1-RZscoreallow/RZdef)
 
 thisWk$Sacks <- as.numeric(getMetric(priorWks,tw$Team,102))+
                 as.numeric(getMetric(priorWks,tw$Oppn,101))
@@ -129,7 +127,6 @@ for(i in 4:length(thisWk)){thisWkRank[i] <- rank(-thisWk[i],ties.method='average
 thisWkRankAvg <- as.data.frame(cbind(Week=thisWk$Week
                               ,Team=thisWk$Team
                               ,Oppn=thisWk$Oppn
-                              #,QBWRTE=sapply(as.numeric(thisWkRank[4:6,10]),function(x){rowMeans(x)})
                               ,QBWRTE=round(rowMeans(thisWkRank[,c(4:6,10)]),2)
                               ,RB=round(rowMeans(thisWkRank[,c(7:10)]),2)
                               ,DEF=round(rowMeans(thisWkRank[,c(11:15)]),2)

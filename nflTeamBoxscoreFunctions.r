@@ -4,7 +4,6 @@ matchups <-  function(x){  #see line 140 for call
 
 buildThisWk <- function(week,schedule){
   x <- schedule[which(schedule$Week==week),]
-  #numGms <- nrow(thisWk)
   
   # CREDIT: https://stackoverflow.com/questions/19297475/simplest-way-to-get-rbind-to-ignore-column-names
   x <- rbind(x[c(3,4)],setNames(rev(x[c(3,4)]),names(x[c(3,4)])))
