@@ -4,9 +4,9 @@ Project now scrapes team boxscores a week at a time, in appending fashion. The f
 
   1. boxscoreScrapeWk(wkNum) function in nflTeamBoxscoreScrape_v2.py collects boxscore data see September 3, 2018 update for more detail.
   2. nflTeamBoxscoreOutput.r sources:
-      nflTeamBoxscoreFunctions.r to build user defined functions
-      nflTeamBoxscoreStats.r to import, clean and build teams' 'allowed' stats
-      nflTeamBoxscoreAnalysis.r to extract recent weeks and build pair-wise variables for current week matchups
+      - nflTeamBoxscoreFunctions.r to build user defined functions
+      - nflTeamBoxscoreStats.r to import, clean and build teams' 'allowed' stats
+      - nflTeamBoxscoreAnalysis.r to extract recent weeks and build pair-wise variables for current week matchups
   3. nflTeamBoxscoreOutput.r uses Shiny package to output recommendations based on average ranking of pair-wise variable groups.
 
 *NOTE: SOME PRIMETIME GAMES ARE TBD on 2018_schedule_single.csv file. Will need updating later on in the season.*
