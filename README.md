@@ -1,6 +1,6 @@
 # October 15, 2018 Update
 
-Project now scrapes team boxscores a week at a time, in appending fashion. The following is the end-to-end process:
+Project now scrapes team boxscores a week at a time, in appending fashion. The following is the end-to-end process from data collection to match-up recommendation/ranking:
 
   1. boxscoreScrapeWk(wkNum) function in nflTeamBoxscoreScrape_v2.py collects boxscore data see September 3, 2018 update for more detail.
   2. nflTeamBoxscoreOutput.r sources:
@@ -14,6 +14,7 @@ Project now scrapes team boxscores a week at a time, in appending fashion. The f
 Future Enhancement:
   - merge in and analyze players' snap count for player picking as well as team picking
   - public online access to Shiny app
+
 
 
 # September 3, 2018 Update
