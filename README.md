@@ -1,3 +1,10 @@
+# October 22, 2018 Update
+
+1. Renamed nflTeamBoxscoreOutput.r to app.r for shinyapp server deploy 
+2. Absolute local paths replaced with relative paths in nflTeamBoxscoreStats.r & app.r
+3. shinyapp deployed on https://datacritic6ord.shinyapps.io/nflmatchups_v1/
+
+
 # October 15, 2018 Update
 
 Project now scrapes team boxscores a week at a time, in appending fashion. The following is the end-to-end process from data collection to match-up recommendation/ranking:
