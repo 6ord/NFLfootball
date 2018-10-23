@@ -1,13 +1,16 @@
-# rm(list=ls())
+# 
+# nfl2018 <- read.csv("D:/workbin/BigData/NFLScrape/nflBoxscoreScrape2018.csv"
+#                     ,stringsAsFactors = FALSE
+# )
+# 
+# schedule2018 <- read.csv("D:/workbin/BigData/NFLScrape/2018_schedule_single.csv"
+#                          ,stringsAsFactors = FALSE
+# )
+
+nfl2018 <- read.csv("nflBoxscoreScrape2018.csv",stringsAsFactors = FALSE)
+schedule2018 <- read.csv("2018_schedule_single.csv",stringsAsFactors = FALSE)
 
 
-nfl2018 <- read.csv("D:/workbin/BigData/NFLScrape/nflBoxscoreScrape2018.csv"
-                    ,stringsAsFactors = FALSE
-)
-
-schedule2018 <- read.csv("D:/workbin/BigData/NFLScrape/2018_schedule_single.csv"
-                         ,stringsAsFactors = FALSE
-)
 schedule2018$Date <- as.Date(schedule2018$Date,'%Y-%m-%d')
 
 nfl2018.orig <- nfl2018
