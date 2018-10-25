@@ -1,13 +1,11 @@
 
 
-numPastWks <- 4
-
-priorWks <- aggPriorWks(nfl2018,numPastWks)
+priorWks <- aggPriorWks(nfl2018,vars$numWks)
 
 priorWks <- cbind(priorWks[1],
                   GP=sapply(priorWks$Team,function(x)
                     {nrow(nfl2018[which(nfl2018$Team==x &
-                                        nfl2018$Week %in% c((max(nfl2018$Week)-numPastWks+1):(max(nfl2018$Week)))),])
+                                        nfl2018$Week %in% c((max(nfl2018$Week)-vars$numWks+1):(max(nfl2018$Week)))),])
                     }),
                   priorWks[2:length(priorWks)]
                   )
@@ -26,7 +24,7 @@ priorWks$FrstDwnByRush <- FrstDwnRsh/FirstDowns
 # priorWks$FrstDwnRshPasRatio <- FrstDwnRsh/FrstDwnPas
 # priorWks$FrstDwnPasProp <- FrstDwnPas/FirstDowns
 # priorWks$TDsRushPassRatio <- TDsRush/TDsPass
-# priorWks$TDsPassRatio <- TDsPass/numPastWks
+# priorWks$TDsPassRatio <- TDsPass/vars$numWks
 
 priorWks$TDsPassAllowedPerGame <- TDsPassAllowed/GP
 priorWks$YdsAllowedPerPass <- PassYdsAllowed/PassPlaysDefended
@@ -40,7 +38,7 @@ priorWks$FrstDwnByRushAllowed <- FrstDwnRshAllowed/FirstDownsAllowed
 # priorWks$FrstDwnAllowedRshPasRatio <- FrstDwnRshAllowed/FrstDwnPasAllowed
 # priorWks$FrstDwnPasProp <- FrstDwnPas/FirstDowns
 # priorWks$TDsAllowedRushPassRatio <- TDsRushAllowed/TDsPassAllowed
-# priorWks$TDsPassRatio <- TDsPass/numPastWks
+# priorWks$TDsPassRatio <- TDsPass/vars$numWks
 
 # fumbles per play ran in last X games
 priorWks$FumbLostPerPlay <- FumblesLost/TotalPlays
@@ -64,7 +62,7 @@ priorWks$XPAttDefendedPerGame <- Kicking.XPDefended/GP
 detach(priorWks)
 # rm(thisWk)
 
-thisWk <- buildThisWk(6,schedule2018)
+thisWk <- buildThisWk(vars$currWk,schedule2018)
 #build team and oppn metrics, cbind with thisWk after
 
 

@@ -1,10 +1,17 @@
 library(shiny)
 
-
 rm(list=ls())
+
+# vars <- list(currWk=8,
+#              numWks=4
+#              )
+
 # source('D:/workbin/BigData/NFLScrape/nflTeamBoxscoreFunctions.r')
 # source('D:/workbin/BigData/NFLScrape/nflTeamBoxscoreStats.r')
 # source('D:/workbin/BigData/NFLScrape/nflTeamBoxscoreAnalysis.r')
+
+# numPastWks <- 4
+# currWk <- 8
 
 source('nflTeamBoxscoreFunctions.r')
 source('nflTeamBoxscoreStats.r')
@@ -18,7 +25,7 @@ source('nflTeamBoxscoreAnalysis.r')
 ui <- fluidPage(
   
   # App title ----
-  titlePanel("2018 NFL Regular Season Wk 6 Outlook based on Wk 2-5"),
+  titlePanel("2018 NFL Regular Season Wk 8 Outlook based on Wk 4-7"),
   
   # Sidebar layout with input and output definitions ----
   sidebarLayout(
