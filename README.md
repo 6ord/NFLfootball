@@ -1,3 +1,8 @@
+# October 24, 2018 Update
+
+1. nflTeamBoxscoreFunctions.r and app.r updated. User set parameters Current week and number of past weeks to build analysis upon, are now contained in a List called 'vars' and is initiated in nflTeamBoxscoreFunctions.r 
+2. nflBoxscoreScrape2018.csv updated using Python scraping script, now inclusive of week 7 boxscores (Read Me will not be updated with every update week over week. Please check published shinyapp (see Oct 22 '18 update) for updates.
+
 # October 22, 2018 Update
 
 1. Renamed nflTeamBoxscoreOutput.r to app.r for shinyapp server deploy 
