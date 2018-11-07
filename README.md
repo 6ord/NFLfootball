@@ -1,3 +1,7 @@
+# November 6, 2018 Update
+1. nflTeamBoxscoreScrape_v2.py now includes snapcountScrape() method that collects snap counts
+2. Shiny App moved to https://datacritic6ord.shinyapps.io/nflmatchups_v22/
+
 # October 24, 2018 Update
 
 1. nflTeamBoxscoreFunctions.r and app.r updated. User set parameters Current week and number of past weeks to build analysis upon, are now contained in a List called 'vars' and is initiated in nflTeamBoxscoreFunctions.r 
