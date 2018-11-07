@@ -1,7 +1,5 @@
 library(shiny)
 
-rm(list=ls())
-
 # vars <- list(currWk=8,
 #              numWks=4
 #              )
@@ -25,7 +23,7 @@ source('nflTeamBoxscoreAnalysis.r')
 ui <- fluidPage(
   
   # App title ----
-  titlePanel("2018 NFL Regular Season Wk 8 Outlook based on Wk 4-7"),
+  titlePanel("2018 NFL Regular Season Wk 10 Outlook based on Wk 5-9"),
   
   # Sidebar layout with input and output definitions ----
   sidebarLayout(
@@ -41,7 +39,8 @@ ui <- fluidPage(
                               "Avg Ranking - Defense",
                               "Avg Ranking - Defense BX",
                               "Avg Ranking - Defense DB",
-                              "Avg Ranking - Kicker")),
+                              "Avg Ranking - Kicker",
+                              "SnapCounts")),
       
       # Button
       downloadButton("downloadData", "Download")
@@ -70,7 +69,8 @@ server <- function(input, output) {
            "Avg Ranking - Defense"=thisWkRankAvg[order(thisWkRankAvg$DEF),],
            "Avg Ranking - Defense BX"=thisWkRankAvg[order(thisWkRankAvg$DLLB),],
            "Avg Ranking - Defense DB"=thisWkRankAvg[order(thisWkRankAvg$DB),],
-           "Avg Ranking - Kicker"=thisWkRankAvg[order(thisWkRankAvg$KR),]
+           "Avg Ranking - Kicker"=thisWkRankAvg[order(thisWkRankAvg$KR),],
+           "SnapCounts"=snapcounts2018
            )
   })
   

@@ -16,7 +16,7 @@ def RegSeason2017BoxscoreScrape():
     tagCSVWriter = csv.writer(tagDump,delimiter=',',lineterminator='\n')
 
     realOutput = []
-    realDump = open('nflBoxscoreScrape.csv','w',newline='')
+    realDump = open('nflBoxscoreScrape.csv','w',newline='',encoding='utf-8')
     realCSVWriter = csv.writer(realDump,delimiter=',',lineterminator='\n')
     
     for i in range(1,257):
@@ -184,3 +184,60 @@ def boxscoreScrapeWk(wkNum):
         realCSVWriter.writerow(realOutput[i])
     realDump.close()
     
+def snapcountScrape():
+    
+    osc_url='https://www.fantasypros.com/nfl/reports/snap-counts/'
+    dsc_url='https://www.fantasypros.com/nfl/reports/snap-counts/defense.php'
+    
+    osc_soup=bs4.BeautifulSoup(requests.get(osc_url).text,'html.parser')
+    dsc_soup=bs4.BeautifulSoup(requests.get(dsc_url).text,'html.parser')
+
+    offTagList=osc_soup.select('.mobile-table td')
+    defTagList=dsc_soup.select('.mobile-table td')
+
+    hdg=['player','position','team','total','average']
+    hdgWks=[]
+    for i in range(1,18):hdgWks.append('Wk'+str(i))
+    heading=hdg[0:3]+hdgWks+hdg[3:5]
+    del hdg, hdgWks
+
+    allSnapCounts=[]
+    allSnapCounts.append(heading)
+    
+    start=0
+    end=22    
+    for i in range(int(len(offTagList)/22)):
+
+        temp=[]
+
+        for j in range(start,end):
+            temp.append(offTagList[j].getText())
+        
+        allSnapCounts.append(temp)
+        del temp
+        start+=22
+        end+=22
+    
+    start=0
+    end=22    
+    for i in range(int(len(defTagList)/22)):
+
+        temp=[]
+
+        for j in range(start,end):
+            temp.append(defTagList[j].getText())
+        
+        allSnapCounts.append(temp)
+        del temp
+        start+=22
+        end+=22
+
+
+
+    with open('nflSnapCount2018.csv','w',newline='',encoding='utf-8') as realDump:
+        realCSVWriter = csv.writer(realDump,delimiter=',',lineterminator='\n')
+        for i in (range(len(allSnapCounts))):
+            realCSVWriter.writerow(allSnapCounts[i])
+        realDump.close()
+
+

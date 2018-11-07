@@ -10,6 +10,12 @@
 nfl2018 <- read.csv("nflBoxscoreScrape2018.csv",stringsAsFactors = FALSE)
 schedule2018 <- read.csv("2018_schedule_single.csv",stringsAsFactors = FALSE)
 
+snapcounts2018 <- data.frame(read.csv("nflSnapCount2018.csv",stringsAsFactors = FALSE))
+# snapcounts2018[4:(length(snapcounts2018)-2)] <- as.numeric(snapcounts2018[4:length(snapcounts2018)])
+# snapcounts2018 <- data.frame(read.csv("D:/workbin/BigData/NFLScrape/nflSnapCount2018.csv",stringsAsFactors = FALSE))
+# 
+# rm(snapcounts2018)
+#Â
 
 schedule2018$Date <- as.Date(schedule2018$Date,'%Y-%m-%d')
 

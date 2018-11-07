@@ -1,8 +1,7 @@
 
-vars <- list(currWk=8,
-             numWks=4
+vars <- list(currWk=10,
+             numWks=5
             )
-
 
 matchups <-  function(x){  #see line 140 for call
   rbind(data.frame(Week=x$Week,Team=x$Road,Oppn=gsub('@','',x$Home)),
@@ -27,4 +26,8 @@ aggPriorWks <- function(weeklybox, numWks=vars$numWks){
 
 getMetric <- function(weeklyBoxAgg, team, colnum){
   sapply(team,function(x){weeklyBoxAgg[which(weeklyBoxAgg$Team==x),][colnum]})
+}
+
+topSnapCounts <- function(tm, pos=c('QB','RB','TE','WR','CB','DE','DT','LB','S'), week, num=5){
+  head(subset(snapcounts2018,snapcounts2018$team %in% tm & snapcounts2018$position %in% pos)[order(snapcounts2018[week+3],decreasing = TRUE),],num)
 }
