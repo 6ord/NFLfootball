@@ -3,6 +3,8 @@
    snapcountScrape() method still under construction
 2. Shiny App moved to https://datacritic6ord.shinyapps.io/nflmatchups_2019_v13/
 
+Full write up here: https://datacritics.com/2018/11/06/data-science-fantasy-football/
+
 # November 6, 2018 Update
 1. nflTeamBoxscoreScrape_v2.py now includes snapcountScrape() method that collects snap counts
 2. Shiny App moved to https://datacritic6ord.shinyapps.io/nflmatchups_v22/
