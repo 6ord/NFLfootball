@@ -1,11 +1,11 @@
 
 
-priorWks <- aggPriorWks(nfl2018,vars$numWks)
+priorWks <- aggPriorWks(gameStats,vars$numWks)
 
 priorWks <- cbind(priorWks[1],
                   GP=sapply(priorWks$Team,function(x)
-                    {nrow(nfl2018[which(nfl2018$Team==x &
-                                        nfl2018$Week %in% c((max(nfl2018$Week)-vars$numWks+1):(max(nfl2018$Week)))),])
+                    {nrow(gameStats[which(gameStats$Team==x &
+                                        gameStats$Week %in% c((max(gameStats$Week)-vars$numWks+1):(max(gameStats$Week)))),])
                     }),
                   priorWks[2:length(priorWks)]
                   )
@@ -62,7 +62,7 @@ priorWks$XPAttDefendedPerGame <- Kicking.XPDefended/GP
 detach(priorWks)
 # rm(thisWk)
 
-thisWk <- buildThisWk(vars$currWk,schedule2018)
+thisWk <- buildThisWk(vars$currWk,leagueSched)
 #build team and oppn metrics, cbind with thisWk after
 
 

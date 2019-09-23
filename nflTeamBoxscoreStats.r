@@ -1,134 +1,134 @@
 # 
-# nfl2018 <- read.csv("D:/workbin/BigData/NFLScrape/nflBoxscoreScrape2018.csv"
-#                     ,stringsAsFactors = FALSE
-# )
+# gameStats <- read.csv("D:/workbin/BigData/NFLScrape/nflBoxscoreScrape2018.csv",stringsAsFactors = FALSE)
 # 
-# schedule2018 <- read.csv("D:/workbin/BigData/NFLScrape/2018_schedule_single.csv"
-#                          ,stringsAsFactors = FALSE
-# )
+# leagueSched <- read.csv("D:/workbin/BigData/NFLScrape/2018_schedule_single.csv",stringsAsFactors = FALSE)
 
-nfl2018 <- read.csv("nflBoxscoreScrape2018.csv",stringsAsFactors = FALSE)
-schedule2018 <- read.csv("2018_schedule_single.csv",stringsAsFactors = FALSE)
+vars <- list(currWk=3,
+             numWks=2
+)
 
-snapcounts2018 <- data.frame(read.csv("nflSnapCount2018.csv",stringsAsFactors = FALSE))
+gameStats <- read.csv("nflBoxscoreScrape2019.csv",stringsAsFactors = FALSE)
+leagueSched <- read.csv("2019_schedule_single.csv",stringsAsFactors = FALSE)
+
+# snapcounts2018 <- data.frame(read.csv("nflSnapCount2018.csv",stringsAsFactors = FALSE))
 # snapcounts2018[4:(length(snapcounts2018)-2)] <- as.numeric(snapcounts2018[4:length(snapcounts2018)])
 # snapcounts2018 <- data.frame(read.csv("D:/workbin/BigData/NFLScrape/nflSnapCount2018.csv",stringsAsFactors = FALSE))
 # 
 # rm(snapcounts2018)
 #Â
 
-schedule2018$Date <- as.Date(schedule2018$Date,'%Y-%m-%d')
+leagueSched$Date <- as.Date(leagueSched$Date,'%Y-%m-%d')
 
-nfl2018.orig <- nfl2018
+gameStats.orig <- gameStats
 
-nfl2018 <- nfl2018[which(nfl2018$Gm!='Gm'),]
+gameStats <- gameStats[which(gameStats$Gm!='Gm'),]
 
-attach(nfl2018)
+attach(gameStats)
 
-nfl2018$Date <- as.Date(Date,'%Y%m%d')
-nfl2018$Time.of.Pos <- strptime(Time.of.Pos,'%M:%S')$hour*60+strptime(Time.of.Pos,'%M:%S')$min
-nfl2018$X1st.Downs <- as.numeric(X1st.Downs)
-nfl2018$Rushing <- as.numeric(Rushing)
-nfl2018$Passing <- as.numeric(Passing)
-nfl2018$Penalty <- as.numeric(Penalty)
+gameStats$Date <- as.Date(Date,'%Y%m%d')
+gameStats$Time.of.Pos <- strptime(Time.of.Pos,'%M:%S')$hour*60+strptime(Time.of.Pos,'%M:%S')$min
+gameStats$X1st.Downs <- as.numeric(X1st.Downs)
+gameStats$Rushing <- as.numeric(Rushing)
+gameStats$Passing <- as.numeric(Passing)
+gameStats$Penalty <- as.numeric(Penalty)
 #Test below completion-attempt
-nfl2018$rdDwnCon <- as.numeric(regmatches(X3rd.Down.Conv,regexpr('\\d+',X3rd.Down.Conv)))
-nfl2018$rdDwnAtt <- abs(as.numeric(regmatches(X3rd.Down.Conv,regexpr('\\-\\d+',X3rd.Down.Conv))))
-nfl2018$thDwnCon <- as.numeric(regmatches(X4th.Down.Conv,regexpr('\\d+',X4th.Down.Conv)))
-nfl2018$thDwnAtt <- abs(as.numeric(regmatches(X4th.Down.Conv,regexpr('\\-\\d+',X4th.Down.Conv))))
+gameStats$rdDwnCon <- as.numeric(regmatches(X3rd.Down.Conv,regexpr('\\d+',X3rd.Down.Conv)))
+gameStats$rdDwnAtt <- abs(as.numeric(regmatches(X3rd.Down.Conv,regexpr('\\-\\d+',X3rd.Down.Conv))))
+gameStats$thDwnCon <- as.numeric(regmatches(X4th.Down.Conv,regexpr('\\d+',X4th.Down.Conv)))
+gameStats$thDwnAtt <- abs(as.numeric(regmatches(X4th.Down.Conv,regexpr('\\-\\d+',X4th.Down.Conv))))
 
-nfl2018$Total.Net.Yards <- as.numeric(Total.Net.Yards)
-nfl2018$Total.Plays <- as.numeric(Total.Plays)
-nfl2018$Avg.Gain<-NULL
+gameStats$Total.Net.Yards <- as.numeric(Total.Net.Yards)
+gameStats$Total.Plays <- as.numeric(Total.Plays)
+gameStats$Avg.Gain<-NULL
 
-nfl2018$Net.Yards.Rushing <- as.numeric(Net.Yards.Rushing)
-nfl2018$Rush.Attempts <- as.numeric(Rush.Attempts)
-nfl2018$Avg.Rush.Yards<-NULL
+gameStats$Net.Yards.Rushing <- as.numeric(Net.Yards.Rushing)
+gameStats$Rush.Attempts <- as.numeric(Rush.Attempts)
+gameStats$Avg.Rush.Yards<-NULL
 
-nfl2018$Net.Yards.Passing <- as.numeric(Net.Yards.Passing)
-nfl2018$PassCom <- as.numeric(regmatches(Comp....Att.,regexpr('\\d+',Comp....Att.)))
-nfl2018$PassAtt <- abs(as.numeric(regmatches(Comp....Att.,regexpr('\\-\\d+',Comp....Att.))))
-nfl2018$Comp....Att. <- NULL
-nfl2018$Yards.Per.Pass <- NULL
+gameStats$Net.Yards.Passing <- as.numeric(Net.Yards.Passing)
+gameStats$PassCom <- as.numeric(regmatches(Comp....Att.,regexpr('\\d+',Comp....Att.)))
+gameStats$PassAtt <- abs(as.numeric(regmatches(Comp....Att.,regexpr('\\-\\d+',Comp....Att.))))
+gameStats$Comp....Att. <- NULL
+gameStats$Yards.Per.Pass <- NULL
 
-nfl2018$Sacked <- as.numeric(regmatches(Sacked...Yards.Lost,regexpr('\\d+',Sacked...Yards.Lost)))
-nfl2018$SackYdsLost <- abs(as.numeric(regmatches(Sacked...Yards.Lost,regexpr('\\-\\d+',Sacked...Yards.Lost))))
-nfl2018$Sacked...Yards.Lost <- NULL
+gameStats$Sacked <- as.numeric(regmatches(Sacked...Yards.Lost,regexpr('\\d+',Sacked...Yards.Lost)))
+gameStats$SackYdsLost <- abs(as.numeric(regmatches(Sacked...Yards.Lost,regexpr('\\-\\d+',Sacked...Yards.Lost))))
+gameStats$Sacked...Yards.Lost <- NULL
 
-nfl2018$Penalties <- as.numeric(regmatches(Penalties...Yards,regexpr('\\d+',Penalties...Yards)))
-nfl2018$PenaltyYdsLost <- abs(as.numeric(regmatches(Penalties...Yards,regexpr('\\-\\d+',Penalties...Yards))))
-nfl2018$Penalties...Yards <- NULL
+gameStats$Penalties <- as.numeric(regmatches(Penalties...Yards,regexpr('\\d+',Penalties...Yards)))
+gameStats$PenaltyYdsLost <- abs(as.numeric(regmatches(Penalties...Yards,regexpr('\\-\\d+',Penalties...Yards))))
+gameStats$Penalties...Yards <- NULL
 
-nfl2018$Touchdowns <- as.numeric(Touchdowns)
-nfl2018$Rushing.TDs <- as.numeric(Rushing.TDs)
-nfl2018$Passing.TDs <- as.numeric(Passing.TDs)
-nfl2018$Other <- as.numeric(Other)
+gameStats$Touchdowns <- as.numeric(Touchdowns)
+gameStats$Rushing.TDs <- as.numeric(Rushing.TDs)
+gameStats$Passing.TDs <- as.numeric(Passing.TDs)
+gameStats$Other <- as.numeric(Other)
 
-nfl2018$Turnovers <- as.numeric(Turnovers)
+gameStats$Turnovers <- as.numeric(Turnovers)
 
-nfl2018$Fumbles <- as.numeric(regmatches(Fumbles...Lost,regexpr('\\d+',Fumbles...Lost)))
-nfl2018$FumblesLost <- abs(as.numeric(regmatches(Fumbles...Lost,regexpr('\\-\\d+',Fumbles...Lost))))
-nfl2018$Fumbles...Lost <- NULL
+gameStats$Fumbles <- as.numeric(regmatches(Fumbles...Lost,regexpr('\\d+',Fumbles...Lost)))
+gameStats$FumblesLost <- abs(as.numeric(regmatches(Fumbles...Lost,regexpr('\\-\\d+',Fumbles...Lost))))
+gameStats$Fumbles...Lost <- NULL
 
-nfl2018$Int..Thrown <- as.numeric(Int..Thrown)
-nfl2018$Punts...Avg <- NULL
-nfl2018$Return.Yards <- NULL
-nfl2018$PuntReturns <- as.numeric(regmatches(Punts...Returns,regexpr('\\d+',Punts...Returns)))
-nfl2018$PuntReturnYds <- abs(as.numeric(regmatches(Punts...Returns,regexpr('\\-\\d+',Punts...Returns))))
-nfl2018$KickReturns <- as.numeric(regmatches(Kickoffs...Returns,regexpr('\\d+',Kickoffs...Returns)))
-nfl2018$KickReturnYds <- abs(as.numeric(regmatches(Kickoffs...Returns,regexpr('\\-\\d+',Kickoffs...Returns))))
-nfl2018$Ints <- as.numeric(regmatches(Int....Returns,regexpr('\\d+',Int....Returns)))
-nfl2018$IntReturnYds <- abs(as.numeric(regmatches(Int....Returns,regexpr('\\-\\d+',Int....Returns))))
+gameStats$Int..Thrown <- as.numeric(Int..Thrown)
+gameStats$Punts...Avg <- NULL
+gameStats$Return.Yards <- NULL
+gameStats$PuntReturns <- as.numeric(regmatches(Punts...Returns,regexpr('\\d+',Punts...Returns)))
+gameStats$PuntReturnYds <- abs(as.numeric(regmatches(Punts...Returns,regexpr('\\-\\d+',Punts...Returns))))
+gameStats$KickReturns <- as.numeric(regmatches(Kickoffs...Returns,regexpr('\\d+',Kickoffs...Returns)))
+gameStats$KickReturnYds <- abs(as.numeric(regmatches(Kickoffs...Returns,regexpr('\\-\\d+',Kickoffs...Returns))))
+gameStats$Ints <- as.numeric(regmatches(Int....Returns,regexpr('\\d+',Int....Returns)))
+gameStats$IntReturnYds <- abs(as.numeric(regmatches(Int....Returns,regexpr('\\-\\d+',Int....Returns))))
 
-nfl2018$Kicking <- NULL
-nfl2018$Kicking.XPMade <- as.numeric(regmatches(Extra.Points,regexpr('\\d+',Extra.Points)))
-nfl2018$Kicking.XPAtt <- as.numeric(regmatches(Extra.Points,regexpr('\\d+$',Extra.Points)))
-nfl2018$Kicking.FGMade <- as.numeric(regmatches(Field.Goals,regexpr('\\d+',Field.Goals)))
-nfl2018$Kicking.FGAtt <- as.numeric(regmatches(Field.Goals,regexpr('\\d+$',Field.Goals)))
+gameStats$Kicking <- NULL
+gameStats$Kicking.XPMade <- as.numeric(regmatches(Extra.Points,regexpr('\\d+',Extra.Points)))
+gameStats$Kicking.XPAtt <- as.numeric(regmatches(Extra.Points,regexpr('\\d+$',Extra.Points)))
+gameStats$Kicking.FGMade <- as.numeric(regmatches(Field.Goals,regexpr('\\d+',Field.Goals)))
+gameStats$Kicking.FGAtt <- as.numeric(regmatches(Field.Goals,regexpr('\\d+$',Field.Goals)))
 
-nfl2018$RZScr <- as.numeric(regmatches(Red.Zone.Eff.,regexpr('\\d+',Red.Zone.Eff.)))
-nfl2018$RZAtt <- as.numeric(regmatches(Red.Zone.Eff.,regexpr('\\d+$',Red.Zone.Eff.)))
+gameStats$RZScr <- as.numeric(regmatches(Red.Zone.Eff.,regexpr('\\d+',Red.Zone.Eff.)))
+gameStats$RZAtt <- as.numeric(regmatches(Red.Zone.Eff.,regexpr('\\d+$',Red.Zone.Eff.)))
 
-nfl2018$GTGConv <- as.numeric(regmatches(Goal.to.Go.Eff.,regexpr('\\d+',Goal.to.Go.Eff.)))
-nfl2018$GTGAtt <- as.numeric(regmatches(Goal.to.Go.Eff.,regexpr('\\d+$',Goal.to.Go.Eff.)))
+gameStats$GTGConv <- as.numeric(regmatches(Goal.to.Go.Eff.,regexpr('\\d+',Goal.to.Go.Eff.)))
+gameStats$GTGAtt <- as.numeric(regmatches(Goal.to.Go.Eff.,regexpr('\\d+$',Goal.to.Go.Eff.)))
 
-nfl2018$Safeties <- NULL
+gameStats$Safeties <- NULL
 
-colnames(nfl2018)[4] <- 'TOP'
-colnames(nfl2018)[5] <- 'FirstDowns'
-colnames(nfl2018)[6] <- 'FrstDwnRsh'
-colnames(nfl2018)[7] <- 'FrstDwnPas'
-colnames(nfl2018)[8] <- 'FrstDwnPen'
+colnames(gameStats)[4] <- 'TOP'
+colnames(gameStats)[5] <- 'FirstDowns'
+colnames(gameStats)[6] <- 'FrstDwnRsh'
+colnames(gameStats)[7] <- 'FrstDwnPas'
+colnames(gameStats)[8] <- 'FrstDwnPen'
 
-colnames(nfl2018)[11] <- 'TotalNetYds'
-colnames(nfl2018)[12] <- 'TotalPlays'
+colnames(gameStats)[11] <- 'TotalNetYds'
+colnames(gameStats)[12] <- 'TotalPlays'
 
-colnames(nfl2018)[13] <- 'RushNetYds'
-colnames(nfl2018)[14] <- 'RushAtt'
+colnames(gameStats)[13] <- 'RushNetYds'
+colnames(gameStats)[14] <- 'RushAtt'
 # NEED AVG RUSH
-colnames(nfl2018)[15] <- 'PassNetYds'
+colnames(gameStats)[15] <- 'PassNetYds'
 # NEED AVG PASS
-colnames(nfl2018)[16] <- 'TDs'
-colnames(nfl2018)[17] <- 'TDsRush'
-colnames(nfl2018)[18] <- 'TDsPass'
-colnames(nfl2018)[19] <- 'TDsOthr'
-colnames(nfl2018)[21] <- 'IntLost'
+colnames(gameStats)[16] <- 'TDs'
+colnames(gameStats)[17] <- 'TDsRush'
+colnames(gameStats)[18] <- 'TDsPass'
+colnames(gameStats)[19] <- 'TDsOthr'
+colnames(gameStats)[21] <- 'IntLost'
 
-nfl2018$X3rd.Down.Conv <- NULL
-nfl2018$X4th.Down.Conv <- NULL
-nfl2018[20:26] <- NULL
+gameStats$X3rd.Down.Conv <- NULL
+gameStats$X4th.Down.Conv <- NULL
+gameStats[20:26] <- NULL
 # home: TRUE/FALSE, if team has @ in front
-for (i in (1:nrow(nfl2018))) nfl2018$home[i] <- grepl(paste('@',nfl2018$Team[i],sep=''),nfl2018$Gm[i])
+for (i in (1:nrow(gameStats))) gameStats$home[i] <- grepl(paste('@',gameStats$Team[i],sep=''),gameStats$Gm[i])
 
-nfl2018 <- merge(nfl2018,unique(schedule2018[c('Week','Date')]),by = 'Date',all=FALSE)
+gameStats <- merge(gameStats,unique(leagueSched[c('Week','Date')]),by = 'Date',all=FALSE)
 
-detach(nfl2018)
-sum(is.na(nfl2018))
+detach(gameStats)
+sum(is.na(gameStats))
 
-#dput(colnames(nfl2018))
+#dput(colnames(gameStats))
 #https://stackoverflow.com/questions/5620885/how-does-one-reorder-columns-in-a-data-frame
 
-nfl2018 <- nfl2018[c("Week", "Gm", "Date", "home", "Team", "TOP",
+gameStats <- gameStats[c("Week", "Gm", "Date", "home", "Team", "TOP",
                      "TotalPlays", "TotalNetYds",
                      "RushAtt", "RushNetYds",
                      "PassCom", "PassAtt", "PassNetYds",
@@ -146,17 +146,17 @@ nfl2018 <- nfl2018[c("Week", "Gm", "Date", "home", "Team", "TOP",
 # High level approach: 1. Create field "Opponent" for each team for a given week (each row).
 #                      2. Merge with itself on Team=Opponent
 
-nfl2018 <- merge(nfl2018,matchups(schedule2018),by=c('Week','Team'))
-nfl2018$Oppn <- as.character(nfl2018$Oppn)
+gameStats <- merge(gameStats,matchups(leagueSched),by=c('Week','Team'))
+gameStats$Oppn <- as.character(gameStats$Oppn)
 
-nfl2018 <- merge(nfl2018,
-                 data.frame(cbind(nfl2018[c('Week','Team')],nfl2018[c(6:29)],nfl2018[c(31:35,37:47)])),
+gameStats <- merge(gameStats,
+                 data.frame(cbind(gameStats[c('Week','Team')],gameStats[c(6:29)],gameStats[c(31:35,37:47)])),
                  by.x=c('Week','Oppn'),by.y=c('Week','Team'))
 
-nfl2018$Oppn <- NULL
+gameStats$Oppn <- NULL
 
 #Rename fields to "allowed"
-colnames(nfl2018) <- c('Week', 'Team', 'Gm', 'Date', 'home', 'TOP', 'TotalPlays', 
+colnames(gameStats) <- c('Week', 'Team', 'Gm', 'Date', 'home', 'TOP', 'TotalPlays', 
                        'TotalYds', 'RushAtt', 'RushYds', 'PassCom', 'PassAtt', 
                        'PassYds', 'TDs', 'TDsRush', 'TDsPass', 'TDsOthr', 
                        'FirstDowns', 'FrstDwnRsh', 'FrstDwnPas', 'FrstDwnPen', 

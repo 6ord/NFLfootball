@@ -1,7 +1,7 @@
 
-vars <- list(currWk=10,
-             numWks=5
-            )
+# vars <- list(currWk=3,
+#              numWks=2
+#             )
 
 matchups <-  function(x){  #see line 140 for call
   rbind(data.frame(Week=x$Week,Team=x$Road,Oppn=gsub('@','',x$Home)),
@@ -18,7 +18,8 @@ buildThisWk <- function(week,schedule){
 }
 
 # wks 1 to vars$numWks
-aggPriorWks <- function(weeklybox, numWks=vars$numWks){ 
+#aggPriorWks <- function(weeklybox, numWks=vars$numWks){ 
+aggPriorWks <- function(weeklybox, numWks){ 
   aggregate(.~Team,
             data=subset(weeklybox,weeklybox$Week %in% c((max(weeklybox$Week)-vars$numWks+1):(max(weeklybox$Week))))[c(2,6:87)],
             FUN=sum)
