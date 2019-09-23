@@ -109,10 +109,11 @@ def boxscoreScrapeWk(wkNum):
     realOutput.append(['Gm','Date','Team'])
     for h in range(1,len(soupOutput[0])):
         realOutput[nxt_rcrd].append(soupOutput[0][h].splitlines()[0])
+        #builds rest of column headings
     nxt_rcrd += 1    
 
     for i in range(len(soupOutput)):
-        url=str(gmURLs.loc[0])
+        url=str(gmURLs.loc[i])
         p = url.find('NFL_')+4    
         realOutput.append([url[p:-1],
                            url[p:p+8],
