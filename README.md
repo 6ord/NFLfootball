@@ -1,3 +1,8 @@
+# September 22, 2019 Update
+1. nflTeamBoxscoreScrape_v3.py now captures a league schedule and generates game boxscore links from that. User no longer has to organize a schedule file to feed into the script.
+   snapcountScrape() method still under construction
+2. Shiny App moved to https://datacritic6ord.shinyapps.io/nflmatchups_2019_v13/
+
 # November 6, 2018 Update
 1. nflTeamBoxscoreScrape_v2.py now includes snapcountScrape() method that collects snap counts
 2. Shiny App moved to https://datacritic6ord.shinyapps.io/nflmatchups_v22/
