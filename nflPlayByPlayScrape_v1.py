@@ -19,9 +19,9 @@ def weeklyScrape(yr,wkNum):
     soup = bs4.BeautifulSoup(requests.get(pff_url+week_url).text,'html.parser')
     games = soup.select(tag)
 
-    #games[0].get('href')
+    gmSoup= bs4.BeautifulSoup(requests.get(pff_url+games[0].get('href')).text,'html.parser')
 
-    #@@@@@@@@3
+    #@@@@@@@@@
 
 
 
