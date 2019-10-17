@@ -22,7 +22,9 @@ def weeklyScrape(yr,wkNum):
     gmSoup= bs4.BeautifulSoup(requests.get(pff_url+games[0].get('href')).text,'html.parser')
 
     #@@@@@@@@@
-
+    url = 'https://www.cbssports.com/nfl/gametracker/playbyplay/NFL_20191014_DET@GB/'
+    soup = bs4.BeautifulSoup(requests.get(url).text,'html.parser')
+    len(soup.select('#TableBase .TableBase-bodyTr'))
 
 
 
